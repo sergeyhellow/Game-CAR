@@ -40,7 +40,7 @@ namespace Game
 
                        Stopwatch sw = new Stopwatch();
             sw.Start();
-            while (sw.Elapsed < TimeSpan.FromSeconds(15))
+            while (sw.Elapsed < TimeSpan.FromSeconds(3))
             {
 
 
@@ -62,37 +62,59 @@ namespace Game
 
         }
 
-        public void Who_win(int surface, int time, Car car, Truck Truck, Motorbike motj ) 
+     
+            
+
+
+        public void Lets_go_time(int surface, int dist, Car car, Truck Truck, Motorbike motj, Logger log)
         {
-            Race_track track = new Race_track();
-            track.get_Surf(surface);
+            
+            double c= car.Lets_go_time(surface, dist);
+            double t= Truck.Lets_go_time(surface, dist);
+            double m= motj.Lets_go_time(surface, dist);
+            
+
+            double[] ar = { c, t, m };
+            double minValue = ar.Min<double>();
            
-            if (surface == 1) 
-            {
-            
 
-              Console.WriteLine($"Time of CAR: {car.Name} is  { car.Car_GetTime(time, 50)}");
-              Console.WriteLine($"Time of TRUCK: {Truck.Name} is  { Truck.Truck_GetTime(time, 50)}");
-              Console.WriteLine($"Time of Bike: {motj.Name} is  { motj.Bike_GetTime(time, 50)}");
+            Console.WriteLine($"Time of CAR: {car.Name} is  {c}");
+            log.redordLog("Information ", "Time of CAR " + " " + car.Name + " " +  c);
+            Console.WriteLine($"Time of TRUCK: {Truck.Name} is  { t}");
+            log.redordLog("Information ", "Time of TRUCK " + " " + Truck.Name + " " + t);
+            Console.WriteLine($"Time of Bike: {motj.Name} is  { m}");
+            log.redordLog("Information ", "Time of Bike " + " "+ motj.Name + " " + m);
 
-               
-            }
-            else if (surface == 2)
+            if (minValue == c)
             {
-                Console.WriteLine($"Time of CAR: {car.Name} is  { car.Car_GetTime(time, 30)}");
-                Console.WriteLine($"Time of: {Truck.Name} is  { Truck.Truck_GetTime(time, 30)}");
-                Console.WriteLine($"Time of: {motj.Name} is  { motj.Bike_GetTime(time, 30)}");
-            }
-            else if (surface == 3)
-            {
-                Console.WriteLine($"Time of CAR: {car.Name} is  { car.Car_GetTime(time, 20)}");
-                Console.WriteLine($"Time of TRUCK: {Truck.Name} is  { Truck.Truck_GetTime(time, 20)}");
-                Console.WriteLine($"Time of Bike: {motj.Name} is  { motj.Bike_GetTime(time, 20)}");
+                Console.WriteLine($"And the winner is: {car.Name} is  {minValue}");
+                log.redordLog("Information ", "the winner is " + " " + car.Name + " " + minValue);
             }
 
-            
+            else if (minValue == t)
+            {
+                Console.WriteLine($"And the winner is : {Truck.Name} is  {minValue}");
+                log.redordLog("Information ", "the winner is " + " " + Truck.Name + " " + minValue);
+            }
+
+
+            else if (minValue == m) Console.WriteLine($"And the winner is : {motj.Name} is  {minValue}");
+            {
+                Console.WriteLine($"And the winner is : {motj.Name} is  {minValue}");
+                log.redordLog("Information ", "the winner is " + " " + motj.Name + " " + minValue);
+
+            }
 
         }
+
+
+
+
+
+
+
+
+
 
 
 
